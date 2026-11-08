@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f5ef;
+  --foreground: #24332d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: #fffdf8;
+  --color-estate: #173f35;
+  --color-estate-deep: #102e27;
+  --color-leaf: #426553;
+  --color-mist: #e5ebe2;
+  --color-mist-ridge: #d5e1d6;
+  --color-amber: #a66b32;
+  --color-ink: var(--foreground);
+  --color-muted: #59665e;
+  --color-line: #d9dfd5;
+  --color-control: #829287;
+  --font-sans: var(--font-manrope), Arial, Helvetica, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", monospace;
+  --shadow-card: 0 4px 16px rgb(23 63 53 / 0.06);
+  --shadow-float: 0 12px 32px rgb(23 63 53 / 0.12);
+  --background-image-mist-gradient: linear-gradient(145deg, #f7f5ef 0%, #e5ebe2 60%, #d5e1d6 100%);
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-mist-ridge);
+    color: var(--color-estate-deep);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-leaf);
+    outline-offset: 4px;
+  }
+
+  input, select {
+    accent-color: var(--color-estate);
+  }
+}
+
+@layer components {
+  .field-control {
+    appearance: none;
+    border: 1px solid var(--color-control);
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  .field-control[data-selected="true"] {
+    border-color: var(--color-estate);
+    background: var(--color-mist);
+    color: var(--color-estate);
+  }
+
+  .field-control:focus,
+  .field-control[aria-expanded="true"] {
+    border-color: var(--color-leaf);
+    outline: 2px solid var(--color-leaf);
+    outline-offset: -2px;
+  }
+}
+
+button, select { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+a, button, input, select { -webkit-tap-highlight-color: transparent; }
+.skip-link { position: absolute; top: -100px; left: 16px; z-index: 50; padding: 16px; background: var(--color-surface); }
+.skip-link:focus { top: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
